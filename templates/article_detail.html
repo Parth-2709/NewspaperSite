@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted pt-2">by {{ object.author }}</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ object.body }}</p>
+                <div class="">
+                    <a href="{% url 'article_update' pk=object.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'article_delete' pk=object.id %}" class="btn btn-danger">Delete</a>
+                    <div class="float-right"> {{article.date}} </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <h4>Comments</h4>
+                <div>
+                    <br>
+                    <a href="{% url 'comment_new' pk=object.id %}" style="text-decoration: none;" >
+                        <h5 class="text-secondary fw-lighter border-bottom border-dark">
+                            Add a comment....
+                        </h5>
+                    </a>
+                </div>
+                <div>
+                    {% for comment in article.comments.all %}
+                        <div class="d-flex">
+                            <div class="text-muted pr-2">&#9642 {{ comment.author }}:</div>
+                            <div> {{ comment }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

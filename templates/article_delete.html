@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% include 'article_detail.html' %}
+{% block content %}
+<div class="container d-flex flex-column justify-content-evenly" style="height: 60vh; width: 50vw;">
+    <form class="form-control d-flex flex-column justify-content-evenly" style="height: 30vh;">
+        {% csrf_token %}
+        <h5>Are you sure you want to delete the article {{ object.title }}?</h5>
+        <div class="float-right">
+            <button type="submit" class="btn btn-danger">Yes</button>
+            <a href="{% url 'article_detail' pk=object.id %}" class="btn btn-primary">No</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}
